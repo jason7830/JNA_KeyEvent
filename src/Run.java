@@ -40,6 +40,7 @@ public class Run {
 		dummy.ki.dwFlags = new WinUser.DWORD(0);
 		dummy.ki.wVk = new WinUser.WORD(0x41);
 		while(true){
+			System.out.println("A");
 			user32.INSTANCE.SendInput(1, input , input.size());
 			Thread.sleep(700);
 		}
