@@ -32,26 +32,26 @@ public class Run {
 		});
 		*/
 		
-		//dummy.ki.time = new WinUser.DWORD(0);
+		//dummy.ki.time = new WinDef.DWORD(0);
 		//dummy.ki.dwExtraInfo = new BaseTSD.ULONG_PTR(0);
 		
 		while(true){
 			LPINPUT input_p = new LPINPUT();
 			LPINPUT.DUMMYUNIONNAME dummy_p = input_p.new DUMMYUNIONNAME();
-			input_p.type = new WinUser.DWORD(1);
-			dummy_p.ki.wScan = new WinUser.WORD(0);
-			dummy_p.ki.dwFlags = new WinUser.DWORD(0);
-			dummy_p.ki.wVk = new WinUser.WORD(0x41);
-			int press = user32.INSTANCE.SendInput(new WinUser.DWORD(1),input_p , input_p.size());
+			input_p.type = new WinDef.DWORD(1);
+			dummy_p.ki.wScan = new WinDef.WORD(0);
+			dummy_p.ki.dwFlags = new WinDef.DWORD(0);
+			dummy_p.ki.wVk = new WinDef.WORD(0x41);
+			int press = user32.INSTANCE.SendInput(new WinDef.DWORD(1),input_p , input_p.size());
 			System.out.println("press: "+press);
 			
 			LPINPUT input_r = new LPINPUT();
 			LPINPUT.DUMMYUNIONNAME dummy_r = input_r.new DUMMYUNIONNAME();
-			input_r.type = new WinUser.DWORD(1);
-			dummy_r.ki.wScan = new WinUser.WORD(0);
-			dummy_r.ki.dwFlags = new WinUser.DWORD(2);
-			dummy_r.ki.wVk = new WinUser.WORD(0x41);
-			int release = user32.INSTANCE.SendInput(new WinUser.DWORD(1),input_r, input_r.size());
+			input_r.type = new WinDef.DWORD(1);
+			dummy_r.ki.wScan = new WinDef.WORD(0);
+			dummy_r.ki.dwFlags = new WinDef.DWORD(2);
+			dummy_r.ki.wVk = new WinDef.WORD(0x41);
+			int release = user32.INSTANCE.SendInput(new WinDef.DWORD(1),input_r, input_r.size());
 			System.out.println("release: "+release);
 			Thread.sleep(700);
 			System.out.println("SLEPT");
@@ -61,11 +61,11 @@ public class Run {
 	
 	public static class MOUSEINPUT extends Structure{
 		public BaseTSD.ULONG_PTR dwExtraInfo;
-		public WinUser.DWORD dwFlags;
-		public WinUser.LONG dx;
-		public WinUser.LONG dy;
-		public WinUser.DWORD mouseData;
-		public WinUser.DWORD time;
+		public WinDef.DWORD dwFlags;
+		public WinDef.LONG dx;
+		public WinDef.LONG dy;
+		public WinDef.DWORD mouseData;
+		public WinDef.DWORD time;
 		protected List getFieldOrder() {
 			return Run.getFieldOrder(this.getClass());
 		}
@@ -73,10 +73,10 @@ public class Run {
 	}
 	
 	public static class KEYBDINPUT extends Structure{
-		public WinUser.WORD wVk;
-		public WinUser.WORD wScan;
-		public WinUser.DWORD dwFlags;
-		public WinUser.DWORD time;
+		public WinDef.WORD wVk;
+		public WinDef.WORD wScan;
+		public WinDef.DWORD dwFlags;
+		public WinDef.DWORD time;
 		public BaseTSD.ULONG_PTR dwExtraInfo;
 		protected List getFieldOrder() {
 			return Run.getFieldOrder(this.getClass());
@@ -84,16 +84,16 @@ public class Run {
 	}
 	
 	public static class HARDWAREINPUT extends Structure{
-		public WinUser.DWORD Msg;
-		public WinUser.WORD wParamL;
-		public WinUser.WORD wParamH;
+		public WinDef.DWORD Msg;
+		public WinDef.WORD wParamL;
+		public WinDef.WORD wParamH;
 		protected List getFieldOrder() {
 			return Run.getFieldOrder(this.getClass());
 		}
 	}
 	
 	public static class LPINPUT extends Structure{
-		public WinUser.DWORD type;
+		public WinDef.DWORD type;
 		public class DUMMYUNIONNAME extends Union{
 			public MOUSEINPUT mi;
 			public KEYBDINPUT ki;
@@ -120,7 +120,7 @@ public class Run {
 	
 	public interface user32 extends StdCallLibrary{
 		user32 INSTANCE = (user32)Native.loadLibrary("user32",user32.class);
-		public int SendInput(WinUser.DWORD cInputs,LPINPUT pInputs, int cbsize);
+		public int SendInput(WinDef.DWORD cInputs,LPINPUT pInputs, int cbsize);
 	}
 	
 }
