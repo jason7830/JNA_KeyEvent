@@ -121,7 +121,7 @@ public class Run {
 	
 	public interface user32 extends StdCallLibrary{
 		user32 INSTANCE = (user32)Native.loadLibrary("user32",user32.class);
-		public int SendInput(WinDef.DWORD cInputs,LPINPUT pInputs, int cbsize);
+		public int SendInput(WinDef.DWORD cInputs,INPUT pInputs, int cbsize);
 	}
 	
 }
