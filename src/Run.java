@@ -36,7 +36,6 @@ public class Run {
 		//dummy.ki.dwExtraInfo = new BaseTSD.ULONG_PTR(0);
 		
 		while(true){
-<<<<<<< HEAD
 			LPINPUT input_p = new LPINPUT();
 			LPINPUT.DUMMYUNIONNAME dummy_p = input_p.new DUMMYUNIONNAME();
 			input_p.type = new WinUser.DWORD(1);
@@ -52,15 +51,8 @@ public class Run {
 			dummy_r.ki.dwFlags = new WinUser.DWORD(2);
 			dummy_r.ki.wVk = new WinUser.WORD(0x41);
 			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input_r}, input_r.size());
-=======
-			dummy.ki.dwFlags = new WinUser.DWORD(0);
-			dummy.ki.wVk = new WinUser.WORD(0x41);
-			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input} , input.size());
-			dummy.ki.wVk = new WinUser.WORD(0x41);
-			dummy.ki.dwFlags = new WinUser.DWORD(2);
-			System.out.println("A");
->>>>>>> 2d5193625519dd532e5792d22c995eae02502199
 			Thread.sleep(700);
+			System.out.println("SLEPT");
 		}
 		//System.out.println("TEST");
 	}
