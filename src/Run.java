@@ -36,22 +36,21 @@ public class Run {
 		//dummy.ki.dwExtraInfo = new BaseTSD.ULONG_PTR(0);
 		
 		while(true){
-			INPUT input_p = new INPUT();
-			INPUT.DUMMYUNIONNAME dummy_p = input_p.new DUMMYUNIONNAME();
-			input_p.type = new WinDef.DWORD(1);
-			dummy_p.ki.wScan = new WinDef.WORD(0);
-			dummy_p.ki.dwFlags = new WinDef.DWORD(0);
-			dummy_p.ki.wVk = new WinDef.WORD(0x41);
-			int press = user32.INSTANCE.SendInput(new WinDef.DWORD(1),input_p , input_p.size());
-			System.out.println("press: "+press);
-			
-			INPUT input_r = new INPUT();
-			INPUT.DUMMYUNIONNAME dummy_r = input_r.new DUMMYUNIONNAME();
-			input_r.type = new WinDef.DWORD(1);
-			dummy_r.ki.wScan = new WinDef.WORD(0);
-			dummy_r.ki.dwFlags = new WinDef.DWORD(2);
-			dummy_r.ki.wVk = new WinDef.WORD(0x41);
-			int release = user32.INSTANCE.SendInput(new WinDef.DWORD(1),input_r, input_r.size());
+			INPUT i = new INPUT();
+			INPUT[] ip = (INPUT[]) i.toArray(2);
+			ip[0].type = new WinDef.DWORD(1);
+			ip[0].dummy.setType("ki");
+			//ip[0].dummy.ki.wScan = new WinDef.WORD(0);
+			//input_p.dummy.ki.dwFlags = new WinDef.DWORD(0);
+			ip[0].dummy.ki.wVk = new WinDef.WORD('A');
+			//int press = user32.INSTANCE.SendInput(new WinDef.DWORD(1),input_p , input_p.size());
+			//System.out.println("press: "+press);
+			ip[1].type = new WinDef.DWORD(1);
+			ip[1].dummy.setType("ki");
+			//ip[1].dummy.ki.wScan = new WinDef.WORD(0);
+			ip[1].dummy.ki.dwFlags = new WinDef.DWORD(2);
+			ip[1].dummy.ki.wVk = new WinDef.WORD('A');
+			int release = user32.INSTANCE.SendInput(new WinDef.DWORD(2),ip, ip[0].size());
 			System.out.println("release: "+release);
 			Thread.sleep(700);
 			System.out.println("SLEPT");
@@ -60,6 +59,7 @@ public class Run {
 	}
 	
 	public static class MOUSEINPUT extends Structure{
+		public MOUSEINPUT() {}
 		public BaseTSD.ULONG_PTR dwExtraInfo;
 		public WinDef.DWORD dwFlags;
 		public WinDef.LONG dx;
@@ -73,6 +73,7 @@ public class Run {
 	}
 	
 	public static class KEYBDINPUT extends Structure{
+		public KEYBDINPUT() {}
 		public WinDef.WORD wVk;
 		public WinDef.WORD wScan;
 		public WinDef.DWORD dwFlags;
@@ -84,6 +85,7 @@ public class Run {
 	}
 	
 	public static class HARDWAREINPUT extends Structure{
+		public HARDWAREINPUT() {}
 		public WinDef.DWORD Msg;
 		public WinDef.WORD wParamL;
 		public WinDef.WORD wParamH;
@@ -93,9 +95,15 @@ public class Run {
 	}
 	
 	public static class INPUT extends Structure{
+		public INPUT() {}
 		public WinDef.DWORD type;
+		public DUMMYUNIONNAME dummy = new DUMMYUNIONNAME();
 		
-		public class DUMMYUNIONNAME extends Union{
+		public static class DUMMYUNIONNAME extends Union{
+			public DUMMYUNIONNAME() {
+				
+			}
+			
 			public MOUSEINPUT mi;
 			public KEYBDINPUT ki;
 			public HARDWAREINPUT hi;
@@ -121,7 +129,7 @@ public class Run {
 	
 	public interface user32 extends StdCallLibrary{
 		user32 INSTANCE = (user32)Native.loadLibrary("user32",user32.class);
-		public int SendInput(WinDef.DWORD cInputs,INPUT pInputs, int cbsize);
+		public int SendInput(WinDef.DWORD cInputs,INPUT[] pInputs, int cbsize);
 	}
 	
 }
