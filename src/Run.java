@@ -40,8 +40,11 @@ public class Run {
 		dummy.ki.dwFlags = new WinUser.DWORD(0);
 		dummy.ki.wVk = new WinUser.WORD(0x41);
 		while(true){
-			System.out.println("A");
-			user32.INSTANCE.SendInput(1, input , input.size());
+			dummy.ki.dwFlags = new WinUser.DWORD(0);
+			dummy.ki.wVk = new WinUser.WORD(0x41);
+			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input} , input.size());
+			dummy.ki.wVk = new WinUser.WORD(0x41);
+			dummy.ki.dwFlags = new WinUser.DWORD(2);
 			Thread.sleep(700);
 		}
 		//System.out.println("TEST");
@@ -108,7 +111,7 @@ public class Run {
 	
 	public interface user32 extends StdCallLibrary{
 		user32 INSTANCE = (user32)Native.loadLibrary("user32",user32.class);
-		public int SendInput(long cInputs,LPINPUT pInputs, int cbsize);
+		public int SendInput(WinUser.DWORD cInputs,LPINPUT[] pInputs, int cbsize);
 	}
 	
 }
