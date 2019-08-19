@@ -45,6 +45,7 @@ public class Run {
 			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input} , input.size());
 			dummy.ki.wVk = new WinUser.WORD(0x41);
 			dummy.ki.dwFlags = new WinUser.DWORD(2);
+			System.out.println("A");
 			Thread.sleep(700);
 		}
 		//System.out.println("TEST");
