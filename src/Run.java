@@ -31,20 +31,26 @@ public class Run {
 			}
 		});
 		*/
-		LPINPUT input = new LPINPUT();
-		LPINPUT.DUMMYUNIONNAME dummy = new LPINPUT.DUMMYUNIONNAME();
-		input.type = new WinUser.DWORD(1);
-		dummy.ki.time = new WinUser.DWORD(0);
-		dummy.ki.dwExtraInfo = new BaseTSD.ULONG_PTR(0);
-		dummy.ki.wScan = new WinUser.WORD(0);
-		dummy.ki.dwFlags = new WinUser.DWORD(0);
-		dummy.ki.wVk = new WinUser.WORD(0x41);
+		
+		//dummy.ki.time = new WinUser.DWORD(0);
+		//dummy.ki.dwExtraInfo = new BaseTSD.ULONG_PTR(0);
+		
 		while(true){
-			dummy.ki.dwFlags = new WinUser.DWORD(0);
-			dummy.ki.wVk = new WinUser.WORD(0x41);
-			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input} , input.size());
-			dummy.ki.wVk = new WinUser.WORD(0x41);
-			dummy.ki.dwFlags = new WinUser.DWORD(2);
+			LPINPUT input_p = new LPINPUT();
+			LPINPUT.DUMMYUNIONNAME dummy_p = input_p.new DUMMYUNIONNAME();
+			input_p.type = new WinUser.DWORD(1);
+			dummy_p.ki.wScan = new WinUser.WORD(0);
+			dummy_p.ki.dwFlags = new WinUser.DWORD(0);
+			dummy_p.ki.wVk = new WinUser.WORD(0x41);
+			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input_p} , input_p.size());
+			
+			LPINPUT input_r = new LPINPUT();
+			LPINPUT.DUMMYUNIONNAME dummy_r = input_r.new DUMMYUNIONNAME();
+			input_r.type = new WinUser.DWORD(1);
+			dummy_r.ki.wScan = new WinUser.WORD(0);
+			dummy_r.ki.dwFlags = new WinUser.DWORD(2);
+			dummy_r.ki.wVk = new WinUser.WORD(0x41);
+			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input_r}, input_r.size());
 			Thread.sleep(700);
 		}
 		//System.out.println("TEST");
@@ -85,7 +91,7 @@ public class Run {
 	
 	public static class LPINPUT extends Structure{
 		public WinUser.DWORD type;
-		public static class DUMMYUNIONNAME extends Union{
+		public class DUMMYUNIONNAME extends Union{
 			public MOUSEINPUT mi;
 			public KEYBDINPUT ki;
 			public HARDWAREINPUT hi;
