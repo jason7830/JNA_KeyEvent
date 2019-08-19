@@ -14,7 +14,7 @@ import com.sun.jna.platform.win32.BaseTSD;
 
 
 public class Run {
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
 		/*
 		Frame f = new Frame("test");
@@ -39,8 +39,11 @@ public class Run {
 		dummy.ki.wScan = new WinUser.WORD(0);
 		dummy.ki.dwFlags = new WinUser.DWORD(0);
 		dummy.ki.wVk = new WinUser.WORD(0x41);
-		user32.INSTANCE.SendInput(1, input , input.size());
-		System.out.println("TEST");
+		while(true){
+			user32.INSTANCE.SendInput(1, input , input.size());
+			Thread.sleep(700);
+		}
+		//System.out.println("TEST");
 	}
 	
 	public static class MOUSEINPUT extends Structure{
