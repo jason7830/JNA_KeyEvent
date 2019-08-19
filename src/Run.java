@@ -36,8 +36,8 @@ public class Run {
 		//dummy.ki.dwExtraInfo = new BaseTSD.ULONG_PTR(0);
 		
 		while(true){
-			LPINPUT input_p = new LPINPUT();
-			LPINPUT.DUMMYUNIONNAME dummy_p = input_p.new DUMMYUNIONNAME();
+			INPUT input_p = new INPUT();
+			INPUT.DUMMYUNIONNAME dummy_p = input_p.new DUMMYUNIONNAME();
 			input_p.type = new WinDef.DWORD(1);
 			dummy_p.ki.wScan = new WinDef.WORD(0);
 			dummy_p.ki.dwFlags = new WinDef.DWORD(0);
@@ -45,8 +45,8 @@ public class Run {
 			int press = user32.INSTANCE.SendInput(new WinDef.DWORD(1),input_p , input_p.size());
 			System.out.println("press: "+press);
 			
-			LPINPUT input_r = new LPINPUT();
-			LPINPUT.DUMMYUNIONNAME dummy_r = input_r.new DUMMYUNIONNAME();
+			INPUT input_r = new INPUT();
+			INPUT.DUMMYUNIONNAME dummy_r = input_r.new DUMMYUNIONNAME();
 			input_r.type = new WinDef.DWORD(1);
 			dummy_r.ki.wScan = new WinDef.WORD(0);
 			dummy_r.ki.dwFlags = new WinDef.DWORD(2);
@@ -92,8 +92,9 @@ public class Run {
 		}
 	}
 	
-	public static class LPINPUT extends Structure{
+	public static class INPUT extends Structure{
 		public WinDef.DWORD type;
+		
 		public class DUMMYUNIONNAME extends Union{
 			public MOUSEINPUT mi;
 			public KEYBDINPUT ki;
