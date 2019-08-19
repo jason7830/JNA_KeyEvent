@@ -42,7 +42,7 @@ public class Run {
 			dummy_p.ki.wScan = new WinUser.WORD(0);
 			dummy_p.ki.dwFlags = new WinUser.DWORD(0);
 			dummy_p.ki.wVk = new WinUser.WORD(0x41);
-			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input_p} , input_p.size());
+			user32.INSTANCE.SendInput(new WinUser.DWORD(1),input_p , input_p.size());
 			
 			LPINPUT input_r = new LPINPUT();
 			LPINPUT.DUMMYUNIONNAME dummy_r = input_r.new DUMMYUNIONNAME();
@@ -50,7 +50,7 @@ public class Run {
 			dummy_r.ki.wScan = new WinUser.WORD(0);
 			dummy_r.ki.dwFlags = new WinUser.DWORD(2);
 			dummy_r.ki.wVk = new WinUser.WORD(0x41);
-			user32.INSTANCE.SendInput(new WinUser.DWORD(1),new LPINPUT[] {input_r}, input_r.size());
+			user32.INSTANCE.SendInput(new WinUser.DWORD(1),input_r, input_r.size());
 			Thread.sleep(700);
 			System.out.println("SLEPT");
 		}
@@ -118,7 +118,7 @@ public class Run {
 	
 	public interface user32 extends StdCallLibrary{
 		user32 INSTANCE = (user32)Native.loadLibrary("user32",user32.class);
-		public int SendInput(WinUser.DWORD cInputs,LPINPUT[] pInputs, int cbsize);
+		public int SendInput(WinUser.DWORD cInputs,LPINPUT pInputs, int cbsize);
 	}
 	
 }
