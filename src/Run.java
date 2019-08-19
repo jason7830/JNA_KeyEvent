@@ -1,4 +1,6 @@
 import com.sun.jna.Native;
+import com.sun.jna.Union;
+import com.sun.jna.Structure;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.WinDef.*;
 import com.sun.jna.win32.StdCallLibrary;
@@ -24,8 +26,29 @@ public class Run {
 		});
 	
 	}
+	
+	public static class MOUSEUNPUT extends Structure{
+		long dx;
+		long dy;
+		int mouseData;
+		int dwFlags;
+		int time;
+		Pointer 
+		
+	}
+	
+	public static class tagINPUT extends Structure{
+		int type;
+		public static class DUMMYUNIONNAME extends Union{
+			
+		}
+		
+	}
+	
 	public interface user32 extends StdCallLibrary{
-		user32 INSTANCE = Native.loadLibrary("user32",user32.class);
+		user32 INSTANCE = (user32)Native.loadLibrary("user32",user32.class);
+		
+		public int SendInput(long cInputs, int cbsize);
 		
 	}
 	
