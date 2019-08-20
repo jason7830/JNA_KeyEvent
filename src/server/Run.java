@@ -9,7 +9,8 @@ public class Run {
 	public static void main(String[] args) throws InterruptedException
 	{
 		while(true){
-			int release = sendScanKeyPressed('A');
+			//int release = sendScanKeyPressed('A');
+			int release = sendKey(0x41);
 			System.out.println("release: "+release);
 			Thread.sleep(700);
 			System.out.println("SLEPT");
@@ -24,15 +25,15 @@ public class Run {
 		shift.dummy.ki.wVk = new WinDef.WORD(0x10);
 		
 		INPUT i = new INPUT();
-		INPUT[] ip = (INPUT[])i.toArray(2);
+		INPUT[] ip = (INPUT[])i.toArray(1);
 		ip[0].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
 		ip[0].dummy.setType("ki");
 		ip[0].dummy.ki.wVk = new WinDef.WORD(vkey);
-		ip[1].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
-		ip[1].dummy.setType("ki");
-		ip[1].dummy.ki.wVk = new WinDef.WORD(vkey);
-		ip[1].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_KEYUP);
-		return user32.INSTANCE.SendInput(new WinDef.DWORD(2), ip , ip[0].size());
+		//ip[1].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
+		//ip[1].dummy.setType("ki");
+		//ip[1].dummy.ki.wVk = new WinDef.WORD(vkey);
+		//ip[1].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_KEYUP);
+		return user32.INSTANCE.SendInput(new WinDef.DWORD(1), ip , ip[0].size());
 	}
 	
 	public static WinDef.WORD VKtoSC(char key){
