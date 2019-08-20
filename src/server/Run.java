@@ -10,14 +10,15 @@ public class Run {
 
 	public static void main(String[] args) throws InterruptedException
 	{
-		while(true){
+		sendScanKeyPressed('a');
+		/*while(false){
 			int release = sendScanKeyPressed('A');
 			//int release = sendKey(user32.INSTANCE.VkKeyScanExA('A', dwhkl));
 			
 			System.out.println("release: "+release);
 			Thread.sleep(700);
 			System.out.println("SLEPT");
-		}
+		}*/
 		//System.out.println("TEST");
 	}
 	
