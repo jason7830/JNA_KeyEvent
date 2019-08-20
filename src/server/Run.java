@@ -40,10 +40,11 @@ public class Run {
 	}
 	
 	public static WinDef.WORD VKtoSC(char key){
-		int vk = user32.INSTANCE.VkKeyScanA(key);
+		int vk = user32.INSTANCE.VkKeyScanExA(key,dwhkl);
+		//the low-order byte of the return value contains the virtual-key code and the high-order byte contains the shift state
+		//pick out vk from low order byte
 		vk = vk & 0b0000000011111111;
-		long sc = user32.INSTANCE.MapVirtualKeyA(vk, user32.MAPVK_VK_TO_VSC);
-		System.out.println(""+Integer.toBinaryString(vk)+"_"+sc);
+		long sc = user32.INSTANCE.MapVirtualKeyExA(vk, user32.MAPVK_VK_TO_VSC,dwhkl);
 		return new WinDef.WORD(sc);
 	}
 	
