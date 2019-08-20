@@ -20,6 +20,11 @@ public class Run {
 	}
 	
 	private static int sendKey(int vkey) {
+		INPUT shift = new INPUT();
+		shift.type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
+		shift.dummy.setType("ki");
+		shift.dummy.ki.wVk = new WinDef.WORD(0x10);
+		
 		INPUT i = new INPUT();
 		INPUT[] ip = (INPUT[])i.toArray(2);
 		ip[0].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
