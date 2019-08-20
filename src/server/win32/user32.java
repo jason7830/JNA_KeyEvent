@@ -24,6 +24,8 @@ public interface user32 extends StdCallLibrary{
 	
 	public WinDef.HKL LoadKeyboardLayoutA(String pwszKLID, long Flags);
 	public long MapVirtualKeyExA(long ucode, long uMapType, WinDef.HKL dwHKL);
+	public long MapVirtualKeyA(long ucode, long uMapType);
 	public short VkKeyScanExA(char ch, WinDef.HKL dwhkl);
+	public short VkKeyScanA(char ch);
 	public int SendInput(WinDef.DWORD cInputs,INPUT[] pInputs, int cbsize);
 }
