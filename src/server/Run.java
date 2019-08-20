@@ -11,7 +11,7 @@ public class Run {
 	public static void main(String[] args) throws InterruptedException
 	{
 		while(true){
-			int release = sendKey('A');
+			int release = sendKey(0x41);
 			System.out.println("release: "+release);
 			Thread.sleep(700);
 			System.out.println("SLEPT");
@@ -19,7 +19,7 @@ public class Run {
 		//System.out.println("TEST");
 	}
 	
-	private static int sendKey(char vkey) {
+	private static int sendKey(int vkey) {
 		INPUT i = new INPUT();
 		INPUT[] ip = (INPUT[])i.toArray(2);
 		ip[0].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
@@ -31,5 +31,4 @@ public class Run {
 		ip[1].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_KEYUP);
 		return user32.INSTANCE.SendInput(new WinDef.DWORD(2), ip , ip[0].size());
 	}
-	
 }
