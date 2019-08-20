@@ -4,24 +4,21 @@ import com.sun.jna.platform.win32.*;
 
 import server.win32.WinUser.*;
 import server.win32.user32;
+import server.events.*;
 
 public class Run {
 	private static WinDef.HKL dwhkl = user32.INSTANCE.LoadKeyboardLayoutA(user32.LANG_SYSTEM_DEFAULT,user32.KLF_ACTIVATE);
 
 	public static void main(String[] args) throws InterruptedException
 	{
-		sendScanKeyPressed('a');
-		/*while(false){
-			int release = sendScanKeyPressed('A');
-			//int release = sendKey(user32.INSTANCE.VkKeyScanExA('A', dwhkl));
-			
-			System.out.println("release: "+release);
-			Thread.sleep(700);
-			System.out.println("SLEPT");
-		}*/
-		//System.out.println("TEST");
+		//
+		while(true) {
+			//KeyBoardEvent.sendScanKeyEx(new int[] {0xA0,'A'});
+			KeyBoardEvent.sendScanKey(0x41,new int[] {0,2});
+			Thread.sleep(300);
+		}
+		
 	}
-	
 	private static int sendKey(int vkey) {
 		INPUT shift = new INPUT();
 		shift.type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);

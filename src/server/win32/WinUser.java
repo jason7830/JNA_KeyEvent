@@ -16,7 +16,7 @@ import server.Run;
 
 public interface WinUser {
 	
-	public static List getFieldOrder(Class<?> c, Class<?>... filter) //arg2: 過濾不需要的屬性類型
+	public static List getFieldOrder(Class<?> c, Class<?>... filter) //arg2: ��蕪銝�閬�惇�折���
 	{
 		List<String> names = new ArrayList<String>();
 		ArrayList<Class<?>> filters = new ArrayList<Class<?>>(Arrays.asList(filter));
@@ -45,7 +45,7 @@ public interface WinUser {
 	
 	public static class KEYBDINPUT extends Structure{
 		public KEYBDINPUT() {}
-		
+		public static final int KEYEVENTF_KEYDOWN = 0x0000;
 		public static final int KEYEVENTF_EXTENDEDKEY = 0x0001;
 		public static final int KEYEVENTF_KEYUP = 0x0002;
 		public static final int KEYEVENTF_SCANCODE = 0x0008;

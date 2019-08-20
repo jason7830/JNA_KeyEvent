@@ -28,4 +28,5 @@ public interface user32 extends StdCallLibrary{
 	public short VkKeyScanExA(char ch, WinDef.HKL dwhkl);
 	public short VkKeyScanA(char ch);
 	public int SendInput(WinDef.DWORD cInputs,INPUT[] pInputs, int cbsize);
+	public boolean LockWorkStation() ;
 }
