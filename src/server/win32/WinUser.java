@@ -63,7 +63,7 @@ public interface WinUser {
 	}
 	
 	public static class INPUT extends Structure {
-		public INPUT() {}
+		//public INPUT() {}
 		public WinDef.DWORD type;
 		public DUMMYUNIONNAME dummy = new DUMMYUNIONNAME();
 		
