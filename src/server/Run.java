@@ -6,11 +6,14 @@ import server.win32.WinUser.*;
 import server.win32.user32;
 
 public class Run {
+	private static WinDef.HKL dwhkl = user32.INSTANCE.LoadKeyboardLayoutA(user32.LANG_SYSTEM_DEFAULT,user32.KLF_ACTIVATE);
+
 	public static void main(String[] args) throws InterruptedException
 	{
 		while(true){
-			//int release = sendScanKeyPressed('A');
-			int release = sendKey(0x41);
+			int release = sendScanKeyPressed('A');
+			//int release = sendKey(user32.INSTANCE.VkKeyScanExA('A', dwhkl));
+			
 			System.out.println("release: "+release);
 			Thread.sleep(700);
 			System.out.println("SLEPT");
@@ -37,9 +40,9 @@ public class Run {
 	}
 	
 	public static WinDef.WORD VKtoSC(char key){
-		WinDef.HKL dwhkl = user32.INSTANCE.LoadKeyboardLayoutA(user32.LANG_SYSTEM_DEFAULT,user32.KLF_ACTIVATE);
 		short vk = user32.INSTANCE.VkKeyScanExA(key, dwhkl);
 		long sc = user32.INSTANCE.MapVirtualKeyExA(vk, user32.MAPVK_VK_TO_VSC, dwhkl);
+		System.out.println(""+vk+"_"+sc);
 		return new WinDef.WORD(sc);
 	}
 	
