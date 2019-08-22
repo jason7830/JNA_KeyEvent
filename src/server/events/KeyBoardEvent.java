@@ -49,10 +49,10 @@ public class KeyBoardEvent {
 			ips[i].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY);
 			ips[i].dummy.ki.wVk = new WinDef.WORD(keys[i]);
 			
-			ips[ips.length - i].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
-			ips[ips.length - i].dummy.setType("ki");
-			ips[ips.length - i].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY | KEYBDINPUT.KEYEVENTF_KEYUP);
-			ips[ips.length - i].dummy.ki.wVk = new WinDef.WORD(keys[i]);
+			ips[ips.length -1 -i].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
+			ips[ips.length -1 -i].dummy.setType("ki");
+			ips[ips.length -1 -i].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY | KEYBDINPUT.KEYEVENTF_KEYUP);
+			ips[ips.length -1 -i].dummy.ki.wVk = new WinDef.WORD(keys[i]);
 		}
 		ips[0].dummy.ki.dwFlags.setValue(KEYBDINPUT.KEYEVENTF_KEYDOWN);
 		ips[ips.length - 1].dummy.ki.dwFlags.setValue(KEYBDINPUT.KEYEVENTF_KEYUP);

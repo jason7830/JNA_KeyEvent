@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="jna-5.4.0.jar"/>
 	<classpathentry kind="lib" path="jna-platform-5.4.0.jar" sourcepath="/var/folders/_x/wmmmfl_x1s70bdvrk94v_bk40000gn/T/.org.sf.feeling.decompiler1566225920028/source/jna-platform-5.4.0-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/yoyo/Desktop/java/JNA_KeyEvent/jsp-api.jar"/>
-	<classpathentry kind="lib" path="/Users/yoyo/Desktop/java/JNA_KeyEvent/servlet-api.jar"/>
+	<classpathentry kind="lib" path="jsp-api.jar"/>
+	<classpathentry kind="lib" path="servlet-api.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
