@@ -39,6 +39,26 @@ public class KeyBoardEvent {
 		return user32.INSTANCE.SendInput(new WinDef.DWORD(event.length), ips , ip.size());
 	}
 	
+	public static int sendVKeyEx(int...keys) {
+		int len = keys.length;
+		INPUT ip = new INPUT();
+		INPUT[] ips = (INPUT[])ip.toArray(len * 2);
+		for(int i = 0 ; i < len ; i++) {
+			ips[i].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
+			ips[i].dummy.setType("ki");
+			ips[i].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY);
+			ips[i].dummy.ki.wVk = new WinDef.WORD(keys[i]);
+			
+			ips[ips.length - i].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
+			ips[ips.length - i].dummy.setType("ki");
+			ips[ips.length - i].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY | KEYBDINPUT.KEYEVENTF_KEYUP);
+			ips[ips.length - i].dummy.ki.wVk = new WinDef.WORD(keys[i]);
+		}
+		ips[0].dummy.ki.dwFlags.setValue(KEYBDINPUT.KEYEVENTF_KEYDOWN);
+		ips[ips.length - 1].dummy.ki.dwFlags.setValue(KEYBDINPUT.KEYEVENTF_KEYUP);
+		return user32.INSTANCE.SendInput(new WinDef.DWORD(ips.length), ips , ip.size());
+	}
+	
 	//Extanded key
 	public static int sendScanKeyEx(int... keys) {
 		INPUT ip = new INPUT();
@@ -54,7 +74,7 @@ public class KeyBoardEvent {
 			ips[i+len].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
 			ips[i+len].dummy.setType("ki");
 			WinDef.WORD wScan_r = VKtoSC(keys[i]);			
-			System.out.println(""+VKtoSC(keys[i]));
+			//System.out.println(""+VKtoSC(keys[i]));
 			ips[i+len].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY | KEYBDINPUT.KEYEVENTF_KEYUP | KEYBDINPUT.KEYEVENTF_SCANCODE);
 			ips[i+len].dummy.ki.wScan = wScan_r;
 		}
