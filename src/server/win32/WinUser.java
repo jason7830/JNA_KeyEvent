@@ -40,12 +40,12 @@ public interface WinUser {
 		public static final long MOUSEEVENTF_XDOWN = 0x0080;
 		public static final long MOUSEEVENTF_XUP = 0x0100;
 		
-		public BaseTSD.ULONG_PTR dwExtraInfo;
-		public WinDef.DWORD dwFlags;
 		public WinDef.LONG dx;
 		public WinDef.LONG dy;
 		public WinDef.DWORD mouseData;
+		public WinDef.DWORD dwFlags;
 		public WinDef.DWORD time;
+		public BaseTSD.ULONG_PTR dwExtraInfo;
 		protected List getFieldOrder() {
 			return WinUser.getFieldOrder(this.getClass(),long.class);
 		}
@@ -72,7 +72,7 @@ public interface WinUser {
 	
 	public static class HARDWAREINPUT extends Structure{
 		public HARDWAREINPUT() {}
-		public WinDef.DWORD Msg;
+		public WinDef.DWORD uMsg;
 		public WinDef.WORD wParamL;
 		public WinDef.WORD wParamH;
 		protected List getFieldOrder() {

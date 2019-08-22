@@ -1,10 +1,12 @@
 package server.win32;
 
 import com.sun.jna.win32.StdCallLibrary;
+import server.win32.WinUser.*;
 import server.win32.WinUser.INPUT;
-
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.Pointer;
+
 public interface user32 extends StdCallLibrary{
 	user32 INSTANCE = Native.load("user32",user32.class);
 	
@@ -19,13 +21,14 @@ public interface user32 extends StdCallLibrary{
 	public static final short MAPVK_VK_TO_CHAR = 2;
 	public static final short MAPVK_VSC_TO_VK_EX = 3;
 	public static final short MAPVK_VK_TO_VSC_EX = 4;
-	
+	public WinDef.LPARAM GetMessageExtraInfo();
 	public WinDef.HKL LoadKeyboardLayoutA(String pwszKLID, long Flags);
 	public long MapVirtualKeyExA(long ucode, long uMapType, WinDef.HKL dwHKL);
 	public long MapVirtualKeyA(long ucode, long uMapType);
 	public short VkKeyScanExA(char ch, WinDef.HKL dwhkl);
 	public short VkKeyScanA(char ch);
+	public boolean GetCursorPos(Pointer lppoint);
 	public int SendInput(WinDef.DWORD cInputs,INPUT[] pInputs, int cbsize);
-	public int SendInput(WinDef.DWORD cInputs,INPUT pInput, int cbsize);
+	public int GetSystemMetrics(int nIndex);
 	public boolean LockWorkStation() ;
 }
