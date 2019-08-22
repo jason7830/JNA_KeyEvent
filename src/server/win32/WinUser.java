@@ -28,6 +28,7 @@ public interface WinUser {
 		public MOUSEINPUT() {}
 		public static final long MOUSEEVENTF_ABSOLUTE = 0x8000;
 		public static final long MOUSEEVENTF_HWHEEL = 0x01000;
+		public static final long MOUSEEVENTF_MOVE = 0x0001;
 		public static final long MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000;
 		public static final long MOUSEEVENTF_LEFTDOWN = 0x0002;
 		public static final long MOUSEEVENTF_LEFTUP = 0x0004;
