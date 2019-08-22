@@ -8,7 +8,44 @@ import server.win32.user32;
 import server.win32.WinUser.INPUT;
 import server.win32.WinUser.KEYBDINPUT;
 
+
 public class KeyBoardEvent {
+	public static final class VkeyCode{
+		public static final short VK_BACK = 0x08;
+		public static final short VK_TAB = 0x09;
+		public static final short VK_RETURN = 0x0D;
+		public static final short VK_SHIFT = 0x10;
+		public static final short VK_CONTROL = 0x11;
+		public static final short VK_ALT = 0x12;
+		public static final short VK_ESCAPE = 0x1B;
+		public static final short VK_SPACE = 0x20;
+		public static final short VK_PRIOR = 0x21;
+		public static final short VK_NEXT = 0x22;
+		public static final short VK_END = 0x23;
+		public static final short VK_HOME = 0x24;
+		public static final short VK_LEFT = 0x25;
+		public static final short VK_UP = 0x26;
+		public static final short VK_RIGHT = 0x27;
+		public static final short VK_DOWN = 0x28;
+		public static final short VK_SELECT = 0x29;
+		public static final short VK_PRINT = 0x2A;
+		public static final short VK_EXECUTE = 0x2B;
+		public static final short VK_SNAPSHOT = 0x2C;//Print Screen Key
+		public static final short VK_INSERT = 0x2D;
+		public static final short VK_DELETE = 0x2E;
+		public static final short VK_HELP = 0x2F;
+		public static final short VK_LSHIFT = 0xA0;
+		public static final short VK_RSHIFT = 0xA1;
+		public static final short VK_VOLUME_MUTE = 0xAD;
+		public static final short VK_VOLUME_DOWN = 0xAE;
+		public static final short VK_VOLUME_UP = 0xAF;
+		public static final short VK_MEDIA_NEXT_TRACK = 0xB0;
+		public static final short VK_MEIDA_PREV_TRACK = 0xB1;
+		public static final short VK_MEDIA_STOP = 0xB2;
+		public static final short VK_MEDIA_PLAY_PAUSE = 0xB3;
+		
+	}
+	
 	private static WinDef.HKL dwhkl = user32.INSTANCE.LoadKeyboardLayoutA(user32.LANG_SYSTEM_DEFAULT,user32.KLF_ACTIVATE);
 	//Remember to add a KEYUP event to release KEYDOWN event
 	public static int sendScanKey(int key, int... event) {
@@ -26,6 +63,7 @@ public class KeyBoardEvent {
 		return user32.INSTANCE.SendInput(new WinDef.DWORD(event.length), ips , ip.size());
 	}
 	
+	//Send single key by events
 	public static int sendVKey(int key, int... event) {
 		INPUT ip = new INPUT();
 		if(event.length == 0) event = new int[] {KEYBDINPUT.KEYEVENTF_KEYDOWN};
@@ -71,16 +109,16 @@ public class KeyBoardEvent {
 			WinDef.WORD wScan = VKtoSC(keys[i]);
 			ips[i].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY | KEYBDINPUT.KEYEVENTF_SCANCODE);
 			ips[i].dummy.ki.wScan = wScan;
-			ips[i+len].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
-			ips[i+len].dummy.setType("ki");
-			WinDef.WORD wScan_r = VKtoSC(keys[i]);			
-			//System.out.println(""+VKtoSC(keys[i]));
-			ips[i+len].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY | KEYBDINPUT.KEYEVENTF_KEYUP | KEYBDINPUT.KEYEVENTF_SCANCODE);
-			ips[i+len].dummy.ki.wScan = wScan_r;
+			//Relaese keys by reverse order
+			ips[ips.length -1 -i].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
+			ips[ips.length -1 -i].dummy.setType("ki");
+			WinDef.WORD wScan_r = VKtoSC(keys[i]);	
+			ips[ips.length -1 -i].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_EXTENDEDKEY | KEYBDINPUT.KEYEVENTF_KEYUP | KEYBDINPUT.KEYEVENTF_SCANCODE);
+			ips[ips.length -1 -i].dummy.ki.wScan = wScan_r;
 		}
-		//last key reset to no extanded event
-		ips[len-1].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_SCANCODE);
-		ips[len*2-1].dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_SCANCODE + KEYBDINPUT.KEYEVENTF_KEYUP);
+		//reset first input key with no extended flag
+		ips[0].dummy.ki.dwFlags.setValue(KEYBDINPUT.KEYEVENTF_SCANCODE);
+		ips[ips.length - 1].dummy.ki.dwFlags.setValue(KEYBDINPUT.KEYEVENTF_SCANCODE + KEYBDINPUT.KEYEVENTF_KEYUP);
 		return user32.INSTANCE.SendInput(new WinDef.DWORD(ips.length), ips , ip.size());
 	}
 	
@@ -96,16 +134,5 @@ public class KeyBoardEvent {
 		return new WinDef.WORD(sc);
 	}
 	
-	private static int sendScanKeyPressed(char key) {
-		INPUT i = new INPUT();
-		i.type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
-		i.dummy.setType("ki");
-		i.dummy.ki.wVk = new WinDef.WORD(0);
-		i.dummy.ki.dwFlags = new WinDef.DWORD(KEYBDINPUT.KEYEVENTF_SCANCODE); 
-		WinDef.WORD wScan = VKtoSC(key);
-		i.dummy.ki.wScan = wScan;
-		return user32.INSTANCE.SendInput(new WinDef.DWORD(1),new INPUT[] {i},i.size());
-		
-		//i.dummy.ki.wScan
-	}
 }
+
