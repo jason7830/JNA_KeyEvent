@@ -20,8 +20,21 @@ public class KeyBoardEvent {
 			ips[i].dummy.setType("ki");
 			ips[i].dummy.ki.dwFlags = new WinDef.DWORD(event[i] | KEYBDINPUT.KEYEVENTF_SCANCODE);
 			WinDef.WORD wScan = VKtoSC(key);
-			ips[i].dummy.ki.wScan = new WinDef.WORD(0x0402);
+			ips[i].dummy.ki.wScan = wScan;
 			System.out.println("Scan"+wScan);
+		}
+		return user32.INSTANCE.SendInput(new WinDef.DWORD(event.length), ips , ip.size());
+	}
+	
+	public static int sendVKey(int key, int... event) {
+		INPUT ip = new INPUT();
+		if(event.length == 0) event = new int[] {KEYBDINPUT.KEYEVENTF_KEYDOWN};
+		INPUT[] ips = (INPUT[])ip.toArray(event.length); 
+		for(int i = 0 ; i < event.length; i++) {
+			ips[i].type = new WinDef.DWORD(INPUT.INPUT_KEYBOARD);
+			ips[i].dummy.setType("ki");
+			ips[i].dummy.ki.dwFlags = new WinDef.DWORD(event[i]);
+			ips[i].dummy.ki.wVk = new WinDef.WORD(key);
 		}
 		return user32.INSTANCE.SendInput(new WinDef.DWORD(event.length), ips , ip.size());
 	}
@@ -59,7 +72,7 @@ public class KeyBoardEvent {
 	}
 	
 	public static WinDef.WORD VKtoSC(int key){
-		long sc = user32.INSTANCE.MapVirtualKeyA(key, user32.MAPVK_VK_TO_VSC);
+		long sc = user32.INSTANCE.MapVirtualKeyExA(key, user32.MAPVK_VK_TO_VSC,dwhkl);
 		return new WinDef.WORD(sc);
 	}
 	

@@ -11,10 +11,12 @@ public class Run {
 
 	public static void main(String[] args) throws InterruptedException
 	{
-		//
+		KeyBoardEvent.sendVKey(0x5B, new int[] {0,2});
+		//KeyBoardEvent.sendScanKeyEx(new int[] {0x11,0x12,0x2E});
+		//KeyBoardEvent.sendScanKey(0x27,new int[] {0});
+		//Thread.sleep(5000);
 		while(true) {
-			//KeyBoardEvent.sendScanKeyEx(new int[] {0xA0,'A'});
-			KeyBoardEvent.sendScanKey(0x41,new int[] {0,2});
+			
 			Thread.sleep(300);
 		}
 		
