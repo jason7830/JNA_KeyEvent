@@ -1,12 +1,10 @@
 package server.win32;
 
 import com.sun.jna.win32.StdCallLibrary;
-import server.win32.WinUser.*;
 import server.win32.WinUser.INPUT;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinUser;
 public interface user32 extends StdCallLibrary{
 	user32 INSTANCE = Native.load("user32",user32.class);
 	
@@ -28,5 +26,6 @@ public interface user32 extends StdCallLibrary{
 	public short VkKeyScanExA(char ch, WinDef.HKL dwhkl);
 	public short VkKeyScanA(char ch);
 	public int SendInput(WinDef.DWORD cInputs,INPUT[] pInputs, int cbsize);
+	public int SendInput(WinDef.DWORD cInputs,INPUT pInput, int cbsize);
 	public boolean LockWorkStation() ;
 }

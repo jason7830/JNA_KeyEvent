@@ -4,8 +4,8 @@ import server.events.*;
 public class Run {
 	public static void main(String[] args) throws InterruptedException
 	{
-		KeyBoardEvent.VkeyCode vkc = new KeyBoardEvent.VkeyCode(); 
-		KeyBoardEvent.sendVKey(vkc.VK_VOLUME_MUTE, new int[] {0,2});
+		//KeyBoardEvent.sendVKey(VirtualKeyCode.VK_VOLUME_MUTE, new int[] {0,2});
+		MouseEvent.setAbsPosition(0,0);
 		//KeyBoardEvent.sendVKeyEx(new int[] {0x10,'A'});
 		//KeyBoardEvent.sendScanKeyEx(new int[] {0x11,0x12,0x2E});
 		//KeyBoardEvent.sendScanKey(0x27,new int[] {0});

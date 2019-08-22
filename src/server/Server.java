@@ -7,6 +7,8 @@ import javax.servlet.http.*;
 
 public class Server extends HttpServlet{
 	private String msg ;
+	
+	
 	public void init() throws ServletException{
 		msg = "";
 	}

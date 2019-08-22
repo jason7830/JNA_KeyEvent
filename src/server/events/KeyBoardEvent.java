@@ -1,8 +1,6 @@
 package server.events;
 
 import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinDef.DWORD;
-import com.sun.jna.platform.win32.WinDef.WORD;
 
 import server.win32.user32;
 import server.win32.WinUser.INPUT;
@@ -11,6 +9,8 @@ import server.win32.WinUser.KEYBDINPUT;
 
 public class KeyBoardEvent {
 	public static final class VkeyCode{
+		public static final short VK_LBUTTON = 0x01;
+		public static final short VK_RBUTTON = 0x02;
 		public static final short VK_BACK = 0x08;
 		public static final short VK_TAB = 0x09;
 		public static final short VK_RETURN = 0x0D;
@@ -43,6 +43,19 @@ public class KeyBoardEvent {
 		public static final short VK_MEIDA_PREV_TRACK = 0xB1;
 		public static final short VK_MEDIA_STOP = 0xB2;
 		public static final short VK_MEDIA_PLAY_PAUSE = 0xB3;
+		public static final short VK_F1 = 0x70;
+		public static final short VK_F2 = 0x71;
+		public static final short VK_F3 = 0x72;
+		public static final short VK_F4 = 0x73;
+		public static final short VK_F5 = 0x74;
+		public static final short VK_F6 = 0x75;
+		public static final short VK_F7 = 0x76;
+		public static final short VK_F8 = 0x77;
+		public static final short VK_F9 = 0x78;
+		public static final short VK_F10 = 0x79;
+		public static final short VK_F11 = 0x7A;
+		public static final short VK_F12 = 0x7B;
+		
 		
 	}
 	
