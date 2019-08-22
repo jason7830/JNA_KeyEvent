@@ -11,7 +11,7 @@ import com.sun.jna.platform.win32.WinDef;
 
 public interface WinUser {
 	
-	public static List getFieldOrder(Class<?> c, Class<?>... filter) //arg2: ��蕪銝�閬�惇�折���
+	public static List getFieldOrder(Class<?> c, Class<?>... filter) //arg2:Filter specify class
 	{
 		List<String> names = new ArrayList<String>();
 		ArrayList<Class<?>> filters = new ArrayList<Class<?>>(Arrays.asList(filter));
