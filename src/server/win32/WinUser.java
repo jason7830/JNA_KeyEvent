@@ -46,18 +46,18 @@ public interface WinUser {
 		public WinDef.DWORD mouseData;
 		public WinDef.DWORD time;
 		protected List getFieldOrder() {
-			return WinUser.getFieldOrder(this.getClass());
+			return WinUser.getFieldOrder(this.getClass(),long.class);
 		}
 		
 	}
 	
 	public static class KEYBDINPUT extends Structure{
 		public KEYBDINPUT() {}
-		public static final byte KEYEVENTF_KEYDOWN = 0x0000;
-		public static final byte KEYEVENTF_EXTENDEDKEY = 0x0001;
-		public static final byte KEYEVENTF_KEYUP = 0x0002;
-		public static final byte KEYEVENTF_SCANCODE = 0x0008;
-		public static final byte KEYEVENTF_UNICODE = 0x0004;
+		public static final int KEYEVENTF_KEYDOWN = 0x0000;
+		public static final int KEYEVENTF_EXTENDEDKEY = 0x0001;
+		public static final int KEYEVENTF_KEYUP = 0x0002;
+		public static final int KEYEVENTF_SCANCODE = 0x0008;
+		public static final int KEYEVENTF_UNICODE = 0x0004;
 		
 		public WinDef.WORD wVk;
 		public WinDef.WORD wScan;
