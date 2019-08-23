@@ -14,9 +14,8 @@
         </style>
         <script>
             function sendKey() {
-                $.post("#", {
-                    key: $(this).val()
-                }, status);
+                var url = "./server/Server?key=";
+                $.get(url + $(this).val(), status);
                 console.log(status);
             }
             $(document).ready(function() {
