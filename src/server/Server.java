@@ -5,18 +5,15 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import server.events.VirtualKeyCode;
+
 public class Server extends HttpServlet{
-	private String msg ;
-	
-	
 	public void init() throws ServletException{
-		msg = "";
+		
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		response.setContentType("text/html");
-		PrintWriter pw = response.getWriter();
-		
 		Enumeration<String> elements = request.getParameterNames();
 		while(elements.hasMoreElements()) {
 			System.out.println(elements.nextElement());
@@ -26,5 +23,17 @@ public class Server extends HttpServlet{
 	
 	public void destory() {
 		
+	}
+	
+	public static  short getVkeyCode(String key) throws NoSuchFieldException{
+		short keycode = -1;
+		try
+		{
+			keycode =  (short)VirtualKeyCode.class.getDeclaredField("VK_"+key).get(null);
+		}
+		catch(IllegalAccessException iae) {
+			System.out.println(iae.getStackTrace());
+		}
+		return keycode;
 	}
 }

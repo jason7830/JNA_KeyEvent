@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Remote Control</title>
+    <meata-charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <style>
+            .btn {}
+        </style>
+        <script>
+            function sendKey() {
+                $.post("#", {
+                    key: $(this).val()
+                }, status);
+                console.log(status);
+            }
+            $(document).ready(function() {
+                $("#UP").click(function() {
+                    sendKey.call(this);
+                });
+            });
+        </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">RemoteControl</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a href="#" class="nav-link">HOME</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a href="#Layout1" class="nav-link active" data-toggle="tab">Layout 1</a>
+            </li>
+            <li class="nav-item">
+                <a href="#MediaControl" class="nav-link" data-toggle="tab">MediaControl</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" style="padding-top: 5vh;">
+            <div id="Layout1" class="container tab-pane active">
+                <div class="row justify-content-center no-gutters">
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="UP" value="UP">
+                    </div>
+                </div>
+                <div class="row justify-content-center no-gutters">
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="LEFT" value="LEFT">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="DOWN" value="DOWN">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="RIGHT" value="RIGHT">
+                    </div>
+                </div>
+                <div class="row justify-content-center no-gutters" style="padding-top: 1vh">
+                    <div class="col-12">
+                        <input type="button" style="height: 15vh;" class="btn btn-outline-primary btn-block" id="SPACE" value="SPACE">
+                    </div>
+                </div>
+            </div>
+            <div id="MediaControl" class="container tab-pane fade">
+                <div class="row justify-content-center no-gutters">
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="PREVIOUS" value="PREVIOUS">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="PAUSE" value="PAUSE">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="NEXT" value="NEXT">
+                    </div>
+                </div>
+                <div class="row justify-content-center no-gutters" style="padding-top: 1vh">
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="VOLUME_DOWN" value="Volume Down">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="MUTE" value="MUTE">
+                    </div>
+                    <div class="col-4">
+                        <input type="button" style="height: 20vh;" class="btn btn-outline-primary btn-block" id="VOLUME_UP" value="Volume Up">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,9 +1,7 @@
 package server.events;
 
-import java.time.Clock;
 import com.sun.jna.platform.win32.BaseTSD;
 import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinDef.DWORD;
 
 import server.win32.*;
 import server.win32.WinUser.*;
@@ -19,7 +17,8 @@ public class MouseEvent {
 		int height = user32.INSTANCE.GetSystemMetrics(SM_CYSCREEN);
 		/*
 		If MOUSEEVENTF_ABSOLUTE value is specified, dx and dy contain normalized absolute coordinates between 0 and 65,535. The event procedure maps 
-		these coordinates onto the display surface. Coordinate (0,0) maps onto the upper-left corner of the display surface, (65535,65535) maps onto the lower-right corner. 
+		these coordinates onto the display surface. Coordinate (0,0) maps onto the upper-left corner of the display surface, (65535,65535) maps onto the lower-right corner.
+		Needs to normalize the coordinate. 
 		*/
 		ip.dummy.mi.dx = new WinDef.LONG((long)Math.ceil(dx * 65536 / (double)width));
 		ip.dummy.mi.dy = new WinDef.LONG((long)Math.ceil(dy * 65536 / (double)height));

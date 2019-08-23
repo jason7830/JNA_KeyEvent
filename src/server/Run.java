@@ -14,19 +14,18 @@ public class Run {
 	public static void main(String[] args) throws InterruptedException
 	{
 		//KeyBoardEvent.sendVKey(VirtualKeyCode.VK_VOLUME_MUTE, new int[] {0,2}); 1579 788
-		System.out.println(""+MouseEvent.setAbsPosition(1579,788));
 		//KeyBoardEvent.sendVKeyEx(new int[] {0x10,'A'});
 		//KeyBoardEvent.sendScanKeyEx(new int[] {0x11,0x12,0x2E});
 		//KeyBoardEvent.sendScanKey(0x27,new int[] {0});
 		//Thread.sleep(5000);
 		
-		//¤@­ÓNativeLongªº¤j¤p¬O4bytes
+		//ï¿½@ï¿½ï¿½NativeLongï¿½ï¿½ï¿½jï¿½pï¿½O4bytes
+		/*
 		Pointer pt = new Memory(8);
 		while(true) {
 			user32.INSTANCE.GetCursorPos(pt);
 			System.out.println(pt.getNativeLong(0)+"  "+pt.getNativeLong(4));
 			Thread.sleep(200);
-		}
-		
+		}*/
 	}
 }
