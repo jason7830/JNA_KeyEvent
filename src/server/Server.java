@@ -5,6 +5,9 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.sun.jna.platform.win32.User32;
+
+import server.events.KeyBoardEvent;
 import server.events.VirtualKeyCode;
 
 public class Server extends HttpServlet{
@@ -14,10 +17,12 @@ public class Server extends HttpServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		response.setContentType("text/html");
-		Enumeration<String> elements = request.getParameterNames();
-		while(elements.hasMoreElements()) {
-			System.out.println(elements.nextElement());
-		}
+		System.out.println("TEST");
+		String key = request.getParameter("key");
+		System.out.println("KEY:"+key);
+		try {
+			System.out.println(KeyBoardEvent.sendVKey(getVkeyCode(key), new int[] {0,2}));
+		}catch(Exception ex) {System.out.println("FAILE:"+ex.getStackTrace());}
 		//pw.write("<h1>"+msg+"</h1>");
 	}
 	
@@ -25,14 +30,15 @@ public class Server extends HttpServlet{
 		
 	}
 	
-	public static  short getVkeyCode(String key) throws NoSuchFieldException{
+	public short getVkeyCode(String key) throws NoSuchFieldException{
 		short keycode = -1;
 		try
 		{
 			keycode =  (short)VirtualKeyCode.class.getDeclaredField("VK_"+key).get(null);
+			System.out.println(""+keycode);
 		}
-		catch(IllegalAccessException iae) {
-			System.out.println(iae.getStackTrace());
+		catch(Exception iae) {
+			System.out.println("ILLEGAL:"+iae.getStackTrace());
 		}
 		return keycode;
 	}

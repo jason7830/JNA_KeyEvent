@@ -11,14 +11,13 @@ import server.events.*;
 import server.win32.user32;
 
 public class Run {
-	public static void main(String[] args) throws InterruptedException
+	public static void main(String[] args) throws InterruptedException, NoSuchFieldException
 	{
 		//KeyBoardEvent.sendVKey(VirtualKeyCode.VK_VOLUME_MUTE, new int[] {0,2}); 1579 788
 		//KeyBoardEvent.sendVKeyEx(new int[] {0x10,'A'});
 		//KeyBoardEvent.sendScanKeyEx(new int[] {0x11,0x12,0x2E});
 		//KeyBoardEvent.sendScanKey(0x27,new int[] {0});
 		//Thread.sleep(5000);
-		
 		//�@��NativeLong���j�p�O4bytes
 		/*
 		Pointer pt = new Memory(8);
