@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="jna-5.4.0.jar"/>
-	<classpathentry kind="lib" path="jna-platform-5.4.0.jar" sourcepath="C:/Users/YoYo/AppData/Local/Temp/.org.sf.feeling.decompiler1566344157559/source/jna-platform-5.4.0-sources-1566491950306.jar"/>
+	<classpathentry kind="lib" path="jna-5.4.0.jar" sourcepath="C:/Users/YoYo/AppData/Local/Temp/.org.sf.feeling.decompiler1566826748564/source/jna-5.4.0-sources.jar"/>
+	<classpathentry kind="lib" path="jna-platform-5.4.0.jar" sourcepath="C:/Users/YoYo/AppData/Local/Temp/.org.sf.feeling.decompiler1566826748564/source/jna-platform-5.4.0-sources-1566836729912.jar"/>
 	<classpathentry kind="lib" path="jsp-api.jar"/>
 	<classpathentry kind="lib" path="servlet-api.jar"/>
 	<classpathentry kind="output" path="bin"/>

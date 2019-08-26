@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import com.sun.jna.Structure;
 import com.sun.jna.Union;
+import com.sun.jna.ptr.ByReference;
 import com.sun.jna.platform.win32.BaseTSD;
 import com.sun.jna.platform.win32.WinDef;
 
@@ -103,6 +104,28 @@ public interface WinUser {
 		}
 		protected List getFieldOrder() {
 			return WinUser.getFieldOrder(this.getClass(),int.class);
+		}
+	}
+	
+	public class StringByReference extends ByReference{
+		public StringByReference(){
+			super(1);
+			setValue("");
+		}
+		
+		public StringByReference(String value) {
+			//+1byte for null-terminated
+			super(value.getBytes().length+1);
+			setValue(value);
+		}
+		
+		public void setValue(String value) {
+			getPointer().setString(0, value);
+		}
+		
+		public String getValue()
+		{
+			return getPointer().getString(0);
 		}
 	}
 }
