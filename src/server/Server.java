@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import server.win32.advapi32;
 
+import com.sun.jna.Memory;
 import com.sun.jna.platform.win32.User32;
 
 import server.events.KeyBoardEvent;
@@ -41,5 +43,14 @@ public class Server extends HttpServlet{
 			System.out.println("ILLEGAL:"+iae.getStackTrace());
 		}
 		return keycode;
+	}
+	
+	public static String getClientName() {
+		String name = "";
+		Memory b_name = new Memory(Character.BYTES*(256+1));
+		Memory b_size = new Memory(Integer.BYTES);
+		b_size.setInt(0, 256+1);
+		advapi32.INSTANCE.GetUserNameA(b_name, b_size);
+		return b_name.getString(0);
 	}
 }
