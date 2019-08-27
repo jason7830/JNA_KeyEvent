@@ -14,13 +14,17 @@ import server.win32.user32;
 import server.win32.advapi32;
 
 public class Run {
+	private static String key = "";
+	
 	public static void main(String[] args) throws InterruptedException, NoSuchFieldException
 	{
+		//System.out.println(args.length);
+		KeyBoardEvent.sendVKey(VirtualKeyCode.VK_VOLUME_MUTE, new int[] {0,2});
 		//System.out.println(Server.getClientName());
 		//Server.Logon("YoYo", "761223");
 		
 		//advapi32.INSTANCE.getUserNameA(lpuffer, pcbBuffer);
-		//KeyBoardEvent.sendVKey(VirtualKeyCode.VK_VOLUME_MUTE, new int[] {0,2}); 1579 788
+		// 1579 788
 		//KeyBoardEvent.sendVKeyEx(new int[] {0x10,'A'});
 		//KeyBoardEvent.sendScanKeyEx(new int[] {0x11,0x12,0x2E});
 		//KeyBoardEvent.sendScanKey(0x27,new int[] {0});
@@ -33,5 +37,10 @@ public class Run {
 			System.out.println(pt.getNativeLong(0)+"  "+pt.getNativeLong(4));
 			Thread.sleep(200);
 		}*/
+	}
+	
+	private static void setArgs()
+	{
+		
 	}
 }
