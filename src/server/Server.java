@@ -18,6 +18,8 @@ import server.events.KeyBoardEvent;
 import server.events.VirtualKeyCode;
 
 public class Server extends HttpServlet{
+	public Thread st = null;
+	private static int e = -1;
 	public void init() throws ServletException{
 		
 	}
@@ -29,11 +31,33 @@ public class Server extends HttpServlet{
 	    }
 		response.setContentType("text/html");
 		String key = request.getParameter("key");
-		System.out.println(ipAddress+" >> KEY:"+key);
+		e = Integer.parseInt(request.getParameter("e"));
+		System.out.println("e=" + e);
+		System.out.println(ipAddress+" >> KEY:"+key + "e: " +e);
 		try {
-			System.out.println(KeyBoardEvent.sendVKey(getVkeyCode(key), new int[] {0,2}));
+			if(e==0) {
+				st = sendThread(key);
+				st.start();
+			}
 		}catch(Exception ex) {System.out.println("FAILE:"+ex.getStackTrace());}
 		//pw.write("<h1>"+msg+"</h1>");
+	}
+	
+	public Thread sendThread(String key) {
+		return	new Thread(new Runnable() {
+				public void run() {
+					try {
+						while(e != 2) {
+							KeyBoardEvent.sendVKey(getVkeyCode(key), new int[] {e});
+							Thread.sleep(100);
+						}
+						KeyBoardEvent.sendVKey(getVkeyCode(key), new int[] {e});
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
 	}
 	
 	public void destory() {
@@ -45,7 +69,6 @@ public class Server extends HttpServlet{
 		try
 		{
 			keycode =  (short)VirtualKeyCode.class.getDeclaredField("VK_"+key).get(null);
-			System.out.println(""+keycode);
 		}
 		catch(Exception iae) {
 			System.out.println("ILLEGAL:"+iae.getStackTrace());
@@ -65,8 +88,7 @@ public class Server extends HttpServlet{
 	public static HANDLEByReference Logon(String name, String password) {
 		String domain = ".";
 		HANDLEByReference h = new HANDLEByReference();
-		boolean status = advapi32.INSTANCE.LogonUserA(new StringByReference(name), new StringByReference(domain), new StringByReference(password), WinBase.LOGON32_LOGON_INTERACTIVE, WinBase.LOGON32_PROVIDER_DEFAULT, h);
-		System.out.println(status);
+		boolean status = advapi32.INSTANCE.LogonUserA(new StringByReference(name), new StringByReference(domain), new StringByReference(password), WinBase.LOGON32_LOGON_BATCH, WinBase.LOGON32_PROVIDER_DEFAULT, h);
 		return h;
 	}
 }
