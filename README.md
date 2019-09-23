@@ -5,7 +5,7 @@
 
 架構
 ---
-* `Java JNA:` 呼叫Windows API
+* `Java JNA:` 呼叫Windows API (user32.dll) 發送按鍵事件
 * `Java Servlet:` 後端接收按鍵觸發
 * `Bootstrap:` 簡易的網頁按鍵介面
 
