@@ -12,3 +12,7 @@
 畫面
 ---
 <img src="https://i.imgur.com/0YqUI9i.jpg">
+
+> 手機版網頁畫面效果更佳
+<img src="https://i.imgur.com/CNAZT0U.png" width=50%>
+<img src="https://i.imgur.com/264qKAL.png" width=50%>
